@@ -255,6 +255,11 @@ yi_configure_asset_copying(PROJECT_TARGET ${PROJECT_NAME}
 # Because not every platform requires custom packaging functionality, having a Package target
 # is optional only if the platform's CMake file implements the yi_configure_packaging_for_platform
 # function.
+
+if(TIZEN_NACL)
+    list(APPEND YI_USER_TIZEN_JS_FILES "YiRemoteLogger.js")
+endif()
+
 include(Modules/${YI_PLATFORM_LOWER}/YiConfigurePackagingForPlatform OPTIONAL)
 
 if (COMMAND yi_configure_packaging_for_platform)

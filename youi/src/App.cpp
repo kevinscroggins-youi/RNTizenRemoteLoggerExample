@@ -6,7 +6,15 @@
 #include <cxxreact/JSBigString.h>
 #include <glog/logging.h>
 
-App::App() = default;
+#if defined(YI_TIZEN_NACL)
+#include "logging/YiTizenNaClRemoteLoggerSink.h"
+#endif // TIZEN_NACL
+
+App::App() {
+#if defined(YI_TIZEN_NACL)
+  CYILogger::AddSink(std::make_shared<CYITizenNaClRemoteLoggerSink>());
+#endif // YI_TIZEN_NACL
+}
 
 App::~App() = default;
 
